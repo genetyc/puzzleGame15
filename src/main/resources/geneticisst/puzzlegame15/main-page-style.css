@@ -1,0 +1,11 @@
+.button-group .button {
+    -fx-font-size: 22.0;
+    -fx-font-family: "Brass Mono Bold";
+    -fx-text-fill: "#ff0000";
+}
+
+.button-group .button:hover {
+    -fx-background-color: #CCCCCC; /* Цвет фона при наведении курсора */
+    -fx-text-fill: #FFFFFF; /* Цвет текста при наведении курсора */
+    -fx-font-family: "Arial";
+}
