@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="geneticisst.puzzlegame15.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0"
+            stylesheets="@main-page-style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="geneticisst.puzzlegame15.HelloController">
+   <Label fx:id="titleText" alignment="CENTER" layoutX="50.0" layoutY="218.0" prefHeight="82.0" prefWidth="700.0" text="Fifteen" textAlignment="CENTER" wrapText="true">
+      <font>
+         <Font name="Brass Mono Bold" size="56.0" />
+      </font>
+   </Label>
+   <VBox fx:id="mainVBox" alignment="CENTER" layoutX="290.0" layoutY="300.0" prefHeight="400.0" prefWidth="220.0" spacing="20.0" styleClass="button-group">
+      <Button fx:id="playBtn" mnemonicParsing="false" onAction="#playBtnPressed" text="Play" />
+      <Button fx:id="statsBtn" mnemonicParsing="false" onAction="#statsBtnPressed" text="Stats" />
+      <Button fx:id="settingsBtn" mnemonicParsing="false" onAction="#settingsBtnPressed" text="Settings" />
+   </VBox>
+   <Button fx:id="quitBtn" layoutX="335.0" layoutY="741.0" mnemonicParsing="false" onAction="#quitBtnPressed" prefHeight="45" prefWidth="130" text="Quit" />
+</AnchorPane>
