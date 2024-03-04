@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 public class HelloController {
     public Button playBtn, statsBtn, settingsBtn;
@@ -30,6 +31,6 @@ public class HelloController {
     }
 
     public void quitBtnPressed() {
-        System.out.println("Quit");
+        System.exit(0);
     }
 }
