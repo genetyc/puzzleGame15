@@ -1,4 +1,4 @@
-#menuBtn {
+.button-group .button {
     -fx-font-size: 22px;
     -fx-font-family: "Comic Sans MS";
     -fx-text-fill: "#ff00FF";
@@ -6,12 +6,12 @@
     -fx-pref-height: 45px;
 }
 
-#menuBtn:hover {
+.button-group .button:hover {
     -fx-background-color: "#CCCCCC";
     -fx-text-fill: "#FFFFFF";
     -fx-cursor: hand;
 }
 
-#menuBtn:pressed {
+.button-group .button:pressed {
     -fx-background-color: "#BBBBBB";
 }
