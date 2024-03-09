@@ -25,13 +25,19 @@ public class HelloController {
     }
 
     @FXML
-    void statsBtnPressed() {
-        System.out.println("Stats");
+    void statsBtnPressed() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(SettingsController.class.getResource("stats-page.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 800, 800);
+        Stage stage = (Stage) statsBtn.getScene().getWindow();
+        stage.setScene(scene);
     }
 
     @FXML
-    void settingsBtnPressed() {
-        System.out.println("Settings");
+    void settingsBtnPressed() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(SettingsController.class.getResource("settings-page.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 800, 800);
+        Stage stage = (Stage) settingsBtn.getScene().getWindow();
+        stage.setScene(scene);
     }
 
     public void quitBtnPressed() {
