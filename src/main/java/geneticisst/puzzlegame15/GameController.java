@@ -33,7 +33,6 @@ public class GameController {
     public GridPane field;
     public Pane pane;
     private List<Node> buttonList = new ArrayList<>(15);
-    private Button emptyCell;
     private Pair<Integer, Integer> emptyCellCoord = new Pair<>(fieldSize - 1, fieldSize - 1);
     private List<Integer> leftNums = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
 
@@ -46,11 +45,11 @@ public class GameController {
                 if (pos < fieldSize * fieldSize - 1) {
                     Button button = new Button(String.valueOf(leftNums.get(pos)));
                     field.add(button, j, i);
-                    button.setOnAction(node -> swap(button));
+                    button.setOnAction(node -> checkNearbyTiles(button));
                     buttonList.add(button);
                 }
                 else {
-                    emptyCell = new Button();
+                    Button emptyCell = new Button();
                     emptyCell.setVisible(false);
                     field.add(emptyCell, fieldSize - 1, fieldSize - 1);
                 }
@@ -80,100 +79,26 @@ public class GameController {
          </children>
          */
 
-    private void onBtnClick(Button button) {
-
-        int[] coord = checkTiles(button);
-        if (coord[0] != -1) {
-            System.out.printf("Old row -> %d, old column -> %d, new row -> %d, new column -> %d%n", coord[0], coord[1], coord[2], coord[3]);
-        } else {
-            System.out.println("CLREAR");
-        }
-
-    }
-
     private void swap(Button button) {
         int btnRow = GridPane.getRowIndex(button);
         int btnColumn = GridPane.getColumnIndex(button);
-        int emptyRow = emptyCellCoord.getFirst();
-        int emptyColumn = emptyCellCoord.getSecond();
-        int pos = btnRow * fieldSize + btnColumn;
-        int emptyCellPos = emptyRow * fieldSize + emptyColumn + 1;
-        if (field.getChildren().get(pos + 1) instanceof Button) {
-            System.out.printf("Empty: row -> %d, column -> %d%n", emptyRow, emptyColumn);
-            System.out.printf("Prev: row -> %d, column -> %d%n", btnRow, btnColumn);
-            button.setVisible(false);
-            emptyCell.setVisible(true);
-            emptyCell.setText(button.getText());
-            emptyCellCoord = new Pair<>(btnRow, btnColumn);
-            emptyCell.setOnAction(node -> swap(emptyCell));
-            emptyCell = button;
-            System.out.printf("Empty: row -> %d, column -> %d%n", emptyCellCoord.getFirst(), emptyCellCoord.getSecond());
-
-        }
+        Button emptyCell = new Button();
+        emptyCell.setVisible(false);
+        field.getChildren().remove(button);
+        field.add(emptyCell, btnColumn, btnRow);
+        field.add(button, emptyCellCoord.getSecond(), emptyCellCoord.getFirst());
+        emptyCellCoord = new Pair<>(btnRow, btnColumn);
     }
 
-    private void newEmptyCell() {
-
-    }
-
-    private Pair<Integer, Integer> checkNearbyTiles(Button button) {
+    private void checkNearbyTiles(Button button) {
         int btnRow = GridPane.getRowIndex(button);
         int btnColumn = GridPane.getColumnIndex(button);
-        for (int row = btnRow - 1; row <= btnRow + 1; row+=2) {
-            if (0 < row && row < fieldSize) {
-                if (field.getChildren().get(row * 4 + btnColumn) instanceof javafx.scene.Group) {
-                    return new Pair<>(row, btnColumn);
-                }
+        int eRow = emptyCellCoord.getFirst();
+        int eColumn = emptyCellCoord.getSecond();
+        if (btnRow == eRow || btnColumn == eColumn) {
+            if (Math.abs(btnRow - eRow) == 1 || Math.abs(btnColumn - eColumn) == 1) {
+                swap(button);
             }
-        }
-        for (int column = btnColumn - 1; column <= btnColumn + 1; column+=2) {
-            if (0 < column && column < fieldSize) {
-                if (field.getChildren().get(btnRow * 4 + column) instanceof javafx.scene.Group) {
-                    return new Pair<>(btnRow, column);
-                }
-            }
-        }
-        return new Pair<>(-1, -1);
-    }
-
-    private int[] checkTiles(Button button) {
-        int btnRow = GridPane.getRowIndex(button);
-        int btnColumn = GridPane.getColumnIndex(button);
-        System.out.printf("Row -> %d, column -> %d%n", btnRow, btnColumn);
-        for (int row = btnRow - 1; row <= btnRow + 1; row+=2) {
-            if (0 < row && row < fieldSize) {
-                if (field.getChildren().get(row * 4 + btnColumn) instanceof javafx.scene.Group) {
-                    return new int[]{btnRow, btnColumn, row, btnColumn};
-                }
-            }
-        }
-        for (int column = btnColumn - 1; column <= btnColumn + 1; column+=2) {
-            if (0 < column && column < fieldSize) {
-                if (field.getChildren().get(btnRow * 4 + column) instanceof javafx.scene.Group) {
-                    return new int[]{btnRow, btnColumn, btnRow, column};
-                }
-            }
-        }
-        return new int[]{-1, -1, -1, -1};
-    }
-
-    @FXML
-    private void onMouseMoved(MouseEvent event) {
-        double mouseX = event.getSceneX();
-        double mouseY = event.getSceneY();
-        //bot-right = 530, 630
-        //top-right = 530, 370
-        //top-left = 270, 370
-        //bot-left = 270, 630
-        //square = 65
-
-        Point2D mousePoint = pane.sceneToLocal(mouseX, mouseY);
-
-        if (field.getBoundsInParent().contains(mousePoint)) {
-            System.out.println("Курсор в пределах GridPane");
-            System.out.printf("%f -> %f", mouseX, mouseY);
-        } else {
-            System.out.println("Курсор вне GridPane");
         }
     }
 
