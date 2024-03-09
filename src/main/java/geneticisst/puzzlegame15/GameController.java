@@ -1,15 +1,12 @@
 package geneticisst.puzzlegame15;
 
-import com.almasb.fxgl.core.collection.grid.Grid;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -17,7 +14,6 @@ import kotlin.Pair;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.random.*;
 
 public class GameController {
     private Map<Integer, String> assignments = Map.ofEntries(
@@ -29,16 +25,21 @@ public class GameController {
     public int fieldSize = 4;
 
     public Label titleText;
+    public Label movesCounter;
+    public int moves;
     public Button menuBtn;
     public GridPane field;
     public Pane pane;
     private List<Node> buttonList = new ArrayList<>(15);
     private Pair<Integer, Integer> emptyCellCoord = new Pair<>(fieldSize - 1, fieldSize - 1);
     private List<Integer> leftNums = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
+    public Label tilesCounter;
+    private Set<String> tilesHome = new HashSet<>();
 
     @FXML
     private void initialize() {
         Collections.shuffle(leftNums);
+        moves = 0;
         for (int i = 0; i < fieldSize; i++) {
             for (int j = 0; j < fieldSize; j++) {
                 int pos = i * fieldSize + j;
@@ -47,6 +48,7 @@ public class GameController {
                     field.add(button, j, i);
                     button.setOnAction(node -> checkNearbyTiles(button));
                     buttonList.add(button);
+                    tilesHomeCheck(button); //need fix
                 }
                 else {
                     Button emptyCell = new Button();
@@ -88,6 +90,12 @@ public class GameController {
         field.add(emptyCell, btnColumn, btnRow);
         field.add(button, emptyCellCoord.getSecond(), emptyCellCoord.getFirst());
         emptyCellCoord = new Pair<>(btnRow, btnColumn);
+        movesCounter.setText("Moves: " + ++moves);
+        tilesHomeCheck(button);
+        String tileText = button.getText();
+        if (tilesHome.contains(tileText)) {
+            tilesHome.remove(tileText);
+        }
     }
 
     private void checkNearbyTiles(Button button) {
@@ -100,6 +108,18 @@ public class GameController {
                 swap(button);
             }
         }
+    }
+
+    private void tilesHomeCheck(Button button) {
+        int btnRow = GridPane.getRowIndex(button);
+        int btnColumn = GridPane.getColumnIndex(button);
+        if (assignments.get(Integer.parseInt(button.getText())).equals(btnRow + "" + btnColumn)) {
+            tilesHome.add(button.getText());
+            if (tilesHome.size() == fieldSize * fieldSize - 1) {
+                System.out.println("Game over");
+            }
+        }
+        tilesCounter.setText("Tiles home: " + tilesHome.size());
     }
 
     public void menuBtnPressed(ActionEvent event) throws IOException {
