@@ -1,8 +1,8 @@
 .button-group .button {
     -fx-font-size: 22px;
-    -fx-font-family: "Comic Sans MS";
+    -fx-font-family: "Courier New Bold";
     -fx-text-fill: "#ff00FF";
-    -fx-pref-width: 130px;
+    -fx-pref-width: 145px;
     -fx-pref-height: 45px;
 }
 

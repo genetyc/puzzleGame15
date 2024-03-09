@@ -11,7 +11,7 @@
             stylesheets="@main-page-style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="geneticisst.puzzlegame15.HelloController">
    <Label fx:id="titleText" alignment="CENTER" layoutX="50.0" layoutY="218.0" prefHeight="82.0" prefWidth="700.0" text="Fifteen" textAlignment="CENTER" wrapText="true">
       <font>
-         <Font name="Consolas Bold" size="56.0" />
+         <Font name="Courier New Bold" size="56.0" />
       </font>
    </Label>
    <Group layoutX="290.0" layoutY="300.0" styleClass="button-group">
@@ -20,7 +20,7 @@
          <Button fx:id="statsBtn" mnemonicParsing="false" onAction="#statsBtnPressed" text="Stats"/>
          <Button fx:id="settingsBtn" mnemonicParsing="false" onAction="#settingsBtnPressed" text="Settings"/>
       </VBox>
-      <Button fx:id="quitBtn" layoutX="45.0" layoutY="441.0" mnemonicParsing="false" onAction="#quitBtnPressed"
+      <Button fx:id="quitBtn" layoutX="38.0" layoutY="442.0" mnemonicParsing="false" onAction="#quitBtnPressed"
               prefHeight="45" prefWidth="130" text="Quit"/>
    </Group>
 </AnchorPane>

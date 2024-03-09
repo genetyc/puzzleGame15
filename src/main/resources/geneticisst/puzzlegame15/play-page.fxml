@@ -12,24 +12,41 @@
 <AnchorPane prefHeight="800.0" prefWidth="800.0" stylesheets="@game-style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="geneticisst.puzzlegame15.GameController">
     <Label fx:id="titleText" alignment="CENTER" layoutX="50.0" layoutY="218.0" prefHeight="82.0" prefWidth="700.0" text="Fifteen" textAlignment="CENTER" wrapText="true">
         <font>
-            <Font name="Consolas Bold" size="56.0" />
+            <Font name="Courier New Bold" size="56.0" />
         </font>
     </Label>
-    <Button fx:id="menuBtn" layoutX="335.0" layoutY="741.0" mnemonicParsing="false" onAction="#menuBtnPressed" prefHeight="45" prefWidth="130" styleClass="button-group" text="Menu" />
-    <Pane layoutX="150.0" layoutY="300.0" prefHeight="400.0" prefWidth="500.0">
-        <GridPane alignment="CENTER" gridLinesVisible="true" layoutX="120.0" layoutY="70.0">
+    <Button fx:id="menuBtn" layoutX="328.0" layoutY="741.0" mnemonicParsing="false" styleClass="button-group" onAction="#menuBtnPressed" prefHeight="45" prefWidth="130" text="Menu" />
+    <Pane fx:id="pane" layoutX="150.0" layoutY="300.0" prefHeight="400.0" prefWidth="500.0">
+        <GridPane fx:id="field" alignment="CENTER" gridLinesVisible="true" layoutX="120.0" layoutY="70.0" styleClass="tiles">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="65.0" prefWidth="65.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="65.0" prefWidth="65.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="65.0" prefWidth="65.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="65.0" prefWidth="65.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="65.0" prefWidth="65.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="65.0" prefWidth="65.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="65.0" prefWidth="65.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="65.0" prefWidth="65.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints minHeight="65.0" prefHeight="65.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="65.0" prefHeight="65.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="65.0" prefHeight="65.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="65.0" prefHeight="65.0" valignment="CENTER" vgrow="SOMETIMES" />
             </rowConstraints>
+         <children>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+         </children>
         </GridPane>
     </Pane>
 </AnchorPane>

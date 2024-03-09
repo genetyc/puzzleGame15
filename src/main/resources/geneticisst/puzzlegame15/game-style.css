@@ -1,17 +1,33 @@
-.button-group .button {
+#menuBtn {
     -fx-font-size: 22px;
-    -fx-font-family: "Comic Sans MS";
+    -fx-font-family: "Courier New Bold";
     -fx-text-fill: "#ff00FF";
-    -fx-pref-width: 130px;
+    -fx-pref-width: 145px;
     -fx-pref-height: 45px;
 }
 
-.button-group .button:hover {
+#menuBtn:hover {
     -fx-background-color: "#CCCCCC";
     -fx-text-fill: "#FFFFFF";
     -fx-cursor: hand;
 }
 
-.button-group .button:pressed {
+#menuBtn:pressed {
+    -fx-background-color: "#BBBBBB";
+}
+
+.tiles .button {
+    -fx-font-size: 12px;
+    -fx-font-family: "Courier New Bold";
+    -fx-text-fill: "#ff00FF";
+}
+
+.tiles .button:hover {
+    -fx-background-color: "#CCCCCC";
+    -fx-text-fill: "#FFFFFF";
+    -fx-cursor: hand;
+}
+
+.tiles .button:pressed {
     -fx-background-color: "#BBBBBB";
 }
