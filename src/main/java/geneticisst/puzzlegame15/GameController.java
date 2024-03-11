@@ -48,6 +48,17 @@ public class GameController {
             field.getRowConstraints().add(rowConstraints);
         }
         Collections.shuffle(nums);
+        int unreachable = 0;
+        for (int i = 1; i < nums.size(); i++) {
+            if (nums.get(i-1) == nums.get(i) + 1) {
+                unreachable++;
+            }
+        }
+        if (unreachable % 2 == 1) {
+            System.out.println("Unreachable");
+        } else {
+            System.out.println("Reachable");
+        }
         for (int i = 0; i < fieldSize; i++) {
             for (int j = 0; j < fieldSize; j++) {
                 int pos = i * fieldSize + j;
