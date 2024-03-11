@@ -3,12 +3,15 @@ package geneticisst.puzzlegame15;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 import kotlin.Pair;
 
@@ -26,19 +29,30 @@ public class GameController {
     public Pane pane;
     private List<Button> buttonList = new ArrayList<>(fieldSize * fieldSize - 1);
     private Pair<Integer, Integer> emptyCellCoord = new Pair<>(fieldSize - 1, fieldSize - 1);
-    private List<Integer> leftNums = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
+    private List<Integer> nums = new ArrayList<>(fieldSize * fieldSize - 1);
     public Label tilesCounter;
     private int tilesCorrect = 0;
 
     @FXML
     private void initialize() {
-        Collections.shuffle(leftNums);
         moves = 0;
+        for (int i = 1; i < fieldSize * fieldSize; i++) {
+            nums.add(i);
+        }
+        for (int i = 0; i < fieldSize; i++) {
+            ColumnConstraints columnConstraints = new ColumnConstraints(50, 65, 65);
+            RowConstraints rowConstraints = new RowConstraints(50, 65, 65);
+            columnConstraints.setHalignment(HPos.CENTER);
+            rowConstraints.setValignment(VPos.CENTER);
+            field.getColumnConstraints().add(columnConstraints);
+            field.getRowConstraints().add(rowConstraints);
+        }
+        Collections.shuffle(nums);
         for (int i = 0; i < fieldSize; i++) {
             for (int j = 0; j < fieldSize; j++) {
                 int pos = i * fieldSize + j;
                 if (pos < fieldSize * fieldSize - 1) {
-                    Button button = new Button(String.valueOf(leftNums.get(pos)));
+                    Button button = new Button(String.valueOf(nums.get(pos)));
                     field.add(button, j, i);
                     button.setOnAction(node -> checkNearbyTiles(button));
                     buttonList.add(button);
@@ -53,30 +67,9 @@ public class GameController {
                 }
             }
         }
+        movesCounter.setText("Moves: 0");
         tilesCounter.setText("Tiles home: " + tilesCorrect);
-
-
     }
-
-/*
-         <children>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-         </children>
-         */
 
     private void swap(Button button) {
         int btnRow = GridPane.getRowIndex(button);

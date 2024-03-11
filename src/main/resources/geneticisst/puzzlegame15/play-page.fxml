@@ -3,10 +3,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="800.0" prefWidth="800.0" stylesheets="@game-style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="geneticisst.puzzlegame15.GameController">
@@ -17,20 +15,7 @@
     </Label>
     <Button fx:id="menuBtn" layoutX="328.0" layoutY="741.0" mnemonicParsing="false" onAction="#menuBtnPressed" prefHeight="45" prefWidth="130" styleClass="button-group" text="Menu" />
     <Pane fx:id="pane" layoutX="150.0" layoutY="300.0" prefHeight="400.0" prefWidth="500.0">
-        <GridPane fx:id="field" alignment="CENTER" gridLinesVisible="true" layoutX="120.0" layoutY="70.0" styleClass="tiles">
-            <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="65.0" prefWidth="65.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="65.0" prefWidth="65.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="65.0" prefWidth="65.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="65.0" prefWidth="65.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="65.0" prefHeight="65.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="65.0" prefHeight="65.0" valignment="CENTER" vgrow="SOMETIMES" />
-            </rowConstraints>
-        </GridPane>
+        <GridPane fx:id="field" alignment="CENTER" gridLinesVisible="true" layoutX="120.0" layoutY="70.0" styleClass="tiles"/>
       <Label fx:id="movesCounter" alignment="CENTER" layoutX="178.0" layoutY="8.0" prefHeight="30.0" prefWidth="145.0" text="Moves:" textAlignment="CENTER">
          <font>
             <Font name="Courier New Bold" size="22.0" />
