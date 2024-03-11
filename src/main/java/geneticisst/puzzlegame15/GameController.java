@@ -16,12 +16,6 @@ import java.io.IOException;
 import java.util.*;
 
 public class GameController {
-    private Map<Integer, String> assignments = Map.ofEntries(
-            Map.entry(1, "00"), Map.entry(2, "01"), Map.entry(3, "02"), Map.entry(4, "03"),
-            Map.entry(5, "10"), Map.entry(6, "11"), Map.entry(7, "12"), Map.entry(8, "13"),
-            Map.entry(9, "20"), Map.entry(10, "21"), Map.entry(11, "22"), Map.entry(12, "23"),
-            Map.entry(13, "30"), Map.entry(14, "31"), Map.entry(15, "32")
-    );
     public int fieldSize = 4;
 
     public Label titleText;
@@ -30,11 +24,11 @@ public class GameController {
     public Button menuBtn;
     public GridPane field;
     public Pane pane;
-    private List<Node> buttonList = new ArrayList<>(15);
+    private List<Button> buttonList = new ArrayList<>(fieldSize * fieldSize - 1);
     private Pair<Integer, Integer> emptyCellCoord = new Pair<>(fieldSize - 1, fieldSize - 1);
     private List<Integer> leftNums = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
     public Label tilesCounter;
-    private Set<String> tilesHome = new HashSet<>();
+    private int tilesCorrect = 0;
 
     @FXML
     private void initialize() {
@@ -48,7 +42,9 @@ public class GameController {
                     field.add(button, j, i);
                     button.setOnAction(node -> checkNearbyTiles(button));
                     buttonList.add(button);
-                    tilesHomeCheck(button); //need fix
+                    if (i * fieldSize + j + 1 == Integer.parseInt(button.getText())) {
+                        tilesCorrect++;
+                    }
                 }
                 else {
                     Button emptyCell = new Button();
@@ -57,6 +53,7 @@ public class GameController {
                 }
             }
         }
+        tilesCounter.setText("Tiles home: " + tilesCorrect);
 
 
     }
@@ -91,11 +88,6 @@ public class GameController {
         field.add(button, emptyCellCoord.getSecond(), emptyCellCoord.getFirst());
         emptyCellCoord = new Pair<>(btnRow, btnColumn);
         movesCounter.setText("Moves: " + ++moves);
-        tilesHomeCheck(button);
-        String tileText = button.getText();
-        if (tilesHome.contains(tileText)) {
-            tilesHome.remove(tileText);
-        }
     }
 
     private void checkNearbyTiles(Button button) {
@@ -104,22 +96,25 @@ public class GameController {
         int eRow = emptyCellCoord.getFirst();
         int eColumn = emptyCellCoord.getSecond();
         if (btnRow == eRow || btnColumn == eColumn) {
+            int text = Integer.parseInt(button.getText());
             if (Math.abs(btnRow - eRow) == 1 || Math.abs(btnColumn - eColumn) == 1) {
                 swap(button);
+                if (btnRow * fieldSize + btnColumn + 1 == text) {
+                    tilesCorrect--;
+                    tilesCounter.setText("Tiles home: " + tilesCorrect);
+                } if (eRow * fieldSize + eColumn + 1 == text) {
+                    tilesCorrect++;
+                    tilesCounter.setText("Tiles home: " + tilesCorrect);
+                    if (tilesCorrect == fieldSize * fieldSize - 1) {
+                        gameOver();
+                    }
+                }
             }
         }
     }
 
-    private void tilesHomeCheck(Button button) {
-        int btnRow = GridPane.getRowIndex(button);
-        int btnColumn = GridPane.getColumnIndex(button);
-        if (assignments.get(Integer.parseInt(button.getText())).equals(btnRow + "" + btnColumn)) {
-            tilesHome.add(button.getText());
-            if (tilesHome.size() == fieldSize * fieldSize - 1) {
-                System.out.println("Game over");
-            }
-        }
-        tilesCounter.setText("Tiles home: " + tilesHome.size());
+    private void gameOver() {
+        System.out.println("Game over");
     }
 
     public void menuBtnPressed(ActionEvent event) throws IOException {
