@@ -8,18 +8,17 @@ import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import kotlin.Pair;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.List;
+
+import static geneticisst.puzzlegame15.SettingsController.fieldSize;
 
 public class GameController {
-    public int fieldSize = 4;
 
     public Label titleText;
     public Label movesCounter;
@@ -36,29 +35,19 @@ public class GameController {
     @FXML
     private void initialize() {
         moves = 0;
+        field.relocate(field.getLayoutX() + 0.5 * 65 * (4 - fieldSize), 0);
         for (int i = 1; i < fieldSize * fieldSize; i++) {
             nums.add(i);
         }
         for (int i = 0; i < fieldSize; i++) {
-            ColumnConstraints columnConstraints = new ColumnConstraints(50, 65, 65);
-            RowConstraints rowConstraints = new RowConstraints(50, 65, 65);
+            ColumnConstraints columnConstraints = new ColumnConstraints( 65);
+            RowConstraints rowConstraints = new RowConstraints(65);
             columnConstraints.setHalignment(HPos.CENTER);
             rowConstraints.setValignment(VPos.CENTER);
             field.getColumnConstraints().add(columnConstraints);
             field.getRowConstraints().add(rowConstraints);
         }
         Collections.shuffle(nums);
-        int unreachable = 0;
-        for (int i = 1; i < nums.size(); i++) {
-            if (nums.get(i-1) == nums.get(i) + 1) {
-                unreachable++;
-            }
-        }
-        if (unreachable % 2 == 1) {
-            System.out.println("Unreachable");
-        } else {
-            System.out.println("Reachable");
-        }
         for (int i = 0; i < fieldSize; i++) {
             for (int j = 0; j < fieldSize; j++) {
                 int pos = i * fieldSize + j;
@@ -119,6 +108,9 @@ public class GameController {
 
     private void gameOver() {
         System.out.println("Game over");
+        buttonList.forEach(it -> {
+            it.setOnAction(null);
+        });
     }
 
     public void menuBtnPressed(ActionEvent event) throws IOException {

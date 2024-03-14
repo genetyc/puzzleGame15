@@ -8,23 +8,23 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="800.0" prefWidth="800.0" stylesheets="@game-style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="geneticisst.puzzlegame15.GameController">
+   <Label fx:id="movesCounter" alignment="CENTER" layoutX="328.0" layoutY="300.0" prefHeight="30.0" prefWidth="145.0" text="Moves:" textAlignment="CENTER">
+      <font>
+         <Font name="Courier New Bold" size="22.0" />
+      </font>
+   </Label>
+   <Label fx:id="tilesCounter" alignment="CENTER" contentDisplay="CENTER" layoutX="296.0" layoutY="330.0" prefHeight="30.0" prefWidth="209.0" text="Tiles home: " textAlignment="CENTER">
+      <font>
+         <Font name="Courier New Bold" size="22.0" />
+      </font>
+   </Label>
     <Label fx:id="titleText" alignment="CENTER" layoutX="50.0" layoutY="218.0" prefHeight="82.0" prefWidth="700.0" text="Fifteen" textAlignment="CENTER" wrapText="true">
         <font>
             <Font name="Courier New Bold" size="56.0" />
         </font>
     </Label>
     <Button fx:id="menuBtn" layoutX="328.0" layoutY="741.0" mnemonicParsing="false" onAction="#menuBtnPressed" prefHeight="45" prefWidth="130" styleClass="button-group" text="Menu" />
-    <Pane fx:id="pane" layoutX="150.0" layoutY="300.0" prefHeight="400.0" prefWidth="500.0">
-        <GridPane fx:id="field" alignment="CENTER" gridLinesVisible="true" layoutX="120.0" layoutY="70.0" styleClass="tiles"/>
-      <Label fx:id="movesCounter" alignment="CENTER" layoutX="178.0" layoutY="8.0" prefHeight="30.0" prefWidth="145.0" text="Moves:" textAlignment="CENTER">
-         <font>
-            <Font name="Courier New Bold" size="22.0" />
-         </font>
-      </Label>
-      <Label fx:id="tilesCounter" alignment="CENTER" contentDisplay="CENTER" layoutX="146.0" layoutY="38.0" prefHeight="30.0" prefWidth="209.0" text="Tiles home: " textAlignment="CENTER">
-         <font>
-            <Font name="Courier New Bold" size="22.0" />
-         </font>
-      </Label>
+    <Pane fx:id="pane" layoutX="150.0" layoutY="370.0" prefHeight="334.0" prefWidth="500.0">
+        <GridPane fx:id="field" alignment="CENTER" gridLinesVisible="true" layoutX="120.0" styleClass="tiles" />
     </Pane>
 </AnchorPane>

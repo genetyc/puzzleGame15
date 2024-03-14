@@ -1,0 +1,17 @@
+#menuBtn {
+    -fx-font-size: 22px;
+    -fx-font-family: "Courier New Bold";
+    -fx-text-fill: "#ff00FF";
+    -fx-pref-width: 145px;
+    -fx-pref-height: 45px;
+}
+
+#menuBtn:hover {
+    -fx-background-color: "#CCCCCC";
+    -fx-text-fill: "#FFFFFF";
+    -fx-cursor: hand;
+}
+
+#menuBtn:pressed {
+    -fx-background-color: "#BBBBBB";
+}
